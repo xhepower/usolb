@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:13
     environment:
-      - POSTGRES_DB=dbsl
+      - POSTGRES_DB=dbus
       - POSTGRES_USER=xhepo
       - POSTGRES_PASSWORD=xhepower
     ports:

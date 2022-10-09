@@ -9,19 +9,19 @@ module.exports = {
       [
         {
           email: 'hbuezoss@gmail.com',
-          password: await bcrypt.hash('alcancia..', 10),
+          password: await bcrypt.hash('elguapo69', 10),
           role: 'admin',
           created_at: new Date(),
         },
         {
           email: 'xhepo@hotmail.es',
-          password: await bcrypt.hash('alcancia..', 10),
+          password: await bcrypt.hash('elguapo69', 10),
           role: 'editor',
           created_at: new Date(),
         },
         {
           email: 'xhepoldc@gmail.com',
-          password: await bcrypt.hash('alcancia..', 10),
+          password: await bcrypt.hash('elguapo69', 10),
           role: 'user',
           created_at: new Date(),
         },
