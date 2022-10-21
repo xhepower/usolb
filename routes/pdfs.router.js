@@ -3,6 +3,17 @@ const passport = require('passport');
 const { checkRoles } = require('./../middlewares/auth.handler');
 const PdfService = require('./../services/pdf.service');
 const validatorHandler = require('./../middlewares/validator.handler');
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'pdfs/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const uploadStorage = multer({ storage: storage });
 
 const {
   createPdfSchema,
@@ -63,14 +74,16 @@ router.post(
   '/subir',
   passport.authenticate('jwt', { session: false }),
   checkRoles('editor'),
+  uploadStorage.single('file'),
   async (req, res, next) => {
     try {
-      console.log(req);
-      /*console.log(req);
-      const body = req.body;
-      console.log(body);*/
-      //const newPdf = await service.create(body);
-      //res.status(201).json(newPdf);
+      const title = req.body.title;
+      const file = req.file;
+
+      console.log(title);
+      console.log(file);
+
+      res.sendStatus(200);
     } catch (error) {
       next(error);
     }
