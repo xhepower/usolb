@@ -1,5 +1,5 @@
 const express = require('express');
-
+const passport = require('passport');
 const UserService = require('./../services/user.service');
 const validatorHandler = require('./../middlewares/validator.handler');
 const {
@@ -7,7 +7,7 @@ const {
   createUserSchema,
   getUserSchema,
 } = require('./../schemas/user.schema');
-const passport = require('passport');
+
 const router = express.Router();
 const service = new UserService();
 const { checkRoles } = require('./../middlewares/auth.handler');

@@ -7,7 +7,7 @@ const CuentaSchema = {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
   },
   name: {
     type: DataTypes.STRING,
@@ -20,17 +20,14 @@ const CuentaSchema = {
     field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-}
-
+};
 
 class Cuenta extends Model {
-
   static associate(models) {
     this.hasMany(models.Ingreso, {
       as: 'ingresos',
-      foreignKey: 'cuentaId'
+      foreignKey: 'cuentaId',
     });
-
   }
 
   static config(sequelize) {
@@ -38,8 +35,8 @@ class Cuenta extends Model {
       sequelize,
       tableName: CUENTA_TABLE,
       modelName: 'Cuenta',
-      timestamps: false
-    }
+      timestamps: false,
+    };
   }
 }
 

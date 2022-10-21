@@ -5,7 +5,7 @@ const { INGRESO_TABLE } = require('./../models/ingreso.model');
 const { EGRESO_TABLE } = require('./../models/egreso.model');
 const { CUENTA_TABLE } = require('./../models/cuenta.model');
 const { CONCEPTO_TABLE } = require('./../models/concepto.model');
-
+const { PDF_TABLE } = require('./../models/pdf.model');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable(USER_TABLE, {
@@ -81,6 +81,94 @@ module.exports = {
         defaultValue: Sequelize.NOW,
       },
     });
+    await queryInterface.createTable(PDF_TABLE, {
+      /*
+      name: 'Full Name in Native Language:',
+    idNumber: 'National Identification Number:',
+    city: 'City:',
+    address: 'Home Address:',
+    phone: 'Primary Phone Number:',
+    email: 'Email Address:',
+    passport: 'Passport/Travel Document Number:',
+    purpose: 'Purpose of Trip to the U.S. (1):',
+    issued: 'Have you ever been issued a U.S. visa?',
+    refused:
+      */
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.DataTypes.INTEGER,
+      },
+      idNumber: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+        field: 'id_number',
+      },
+      name: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      city: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      address: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      phone: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      email: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      passport: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      purpose: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      issued: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      refused: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      file: {
+        type: Sequelize.DataTypes.STRING,
+        unique: true,
+        allowNull: true,
+      },
+      date: {
+        type: Sequelize.DataTypes.DATE,
+        unique: false,
+        allowNull: true,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DataTypes.DATE,
+        field: 'created_at',
+        defaultValue: Sequelize.NOW,
+      },
+    });
+
     await queryInterface.createTable(INGRESO_TABLE, {
       id: {
         allowNull: false,
@@ -186,5 +274,6 @@ module.exports = {
     await queryInterface.dropTable(EGRESO_TABLE);
     await queryInterface.dropTable(CUENTA_TABLE);
     await queryInterface.dropTable(CONCEPTO_TABLE);
+    await queryInterface.dropTable(PDF_TABLE);
   },
 };
