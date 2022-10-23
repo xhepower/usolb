@@ -47,5 +47,8 @@
   },
   "engines": {
     "node": "14.x"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
