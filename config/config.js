@@ -6,6 +6,7 @@ const config = {
   port: process.env.PORT || 3000,
   dbUrl: process.env.DATABASE_URL,
   jwtSecret: process.env.JWT_SECRET,
+  apiKey: process.env.API_KEY,
   jwtSecretRecovery: process.env.JWT_SECRET_RECOVERY,
   smtpEmail: process.env.SMTP_EMAIL,
   smtpPassword: process.env.SMTP_PASSWORD,
