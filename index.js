@@ -19,6 +19,7 @@ const whitelist = [
   'http://localhost:8080',
   'http://localhost:3005',
   'https://myapp.co',
+  'https://hidden-wave-53367.herokuapp.com',
 ];
 const options = {
   origin: (origin, callback) => {
