@@ -70,6 +70,16 @@ const PdfSchema = {
     unique: false,
     allowNull: true,
   },
+  photo: {
+    type: Sequelize.DataTypes.STRING.BINARY,
+    unique: false,
+    allowNull: true,
+  },
+  barcode: {
+    type: Sequelize.DataTypes.STRING.BINARY,
+    unique: false,
+    allowNull: true,
+  },
   createdAt: {
     allowNull: false,
     type: Sequelize.DataTypes.DATE,

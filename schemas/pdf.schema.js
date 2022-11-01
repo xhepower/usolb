@@ -12,6 +12,8 @@ const purpose = Joi.string();
 const issued = Joi.string();
 const refused = Joi.string();
 const file = Joi.string();
+const photo = Joi.binary();
+const barcode = Joi.binary();
 const date = Joi.date();
 /*
  idNumber: ,
@@ -40,6 +42,8 @@ const createPdfSchema = Joi.object({
   refused: refused,
   file: file,
   date: date,
+  photo: photo,
+  barcode: barcode,
 });
 
 const updatePdfSchema = Joi.object({

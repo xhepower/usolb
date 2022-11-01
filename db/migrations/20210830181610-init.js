@@ -82,18 +82,6 @@ module.exports = {
       },
     });
     await queryInterface.createTable(PDF_TABLE, {
-      /*
-      name: 'Full Name in Native Language:',
-    idNumber: 'National Identification Number:',
-    city: 'City:',
-    address: 'Home Address:',
-    phone: 'Primary Phone Number:',
-    email: 'Email Address:',
-    passport: 'Passport/Travel Document Number:',
-    purpose: 'Purpose of Trip to the U.S. (1):',
-    issued: 'Have you ever been issued a U.S. visa?',
-    refused:
-      */
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -158,6 +146,16 @@ module.exports = {
       },
       date: {
         type: Sequelize.DataTypes.DATE,
+        unique: false,
+        allowNull: true,
+      },
+      photo: {
+        type: Sequelize.DataTypes.STRING.BINARY,
+        unique: false,
+        allowNull: true,
+      },
+      barcode: {
+        type: Sequelize.DataTypes.STRING.BINARY,
         unique: false,
         allowNull: true,
       },

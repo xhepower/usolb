@@ -70,7 +70,7 @@ class AuthService {
       from: config.smtpEmail,
       to: `${user.email}`,
       subject: 'Email para recuperar contraseña',
-      html: `<b>Ingresa a este <a href="${link}">LINK</a><br></b>`,
+      html: `<b>Ingresa a este <a href="${link}">LINK</a><br> para cambiar su contraseña</b>`,
     };
     const rta = await this.sendMail(mail);
     return rta;
