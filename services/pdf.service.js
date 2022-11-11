@@ -23,6 +23,8 @@ class PdfsService {
     return pdfs;
   }
 
+  async servePDF() {}
+
   async findOne(id) {
     const pdf = await models.Pdf.findByPk(id, {});
     if (!pdf) {

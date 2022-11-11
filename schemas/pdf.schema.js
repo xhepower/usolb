@@ -15,6 +15,7 @@ const file = Joi.string();
 const photo = Joi.binary();
 const barcode = Joi.binary();
 const date = Joi.date();
+const estado = Joi.string();
 /*
  idNumber: ,
       name: ,
@@ -44,6 +45,7 @@ const createPdfSchema = Joi.object({
   date: date,
   photo: photo,
   barcode: barcode,
+  estado: estado,
 });
 
 const updatePdfSchema = Joi.object({

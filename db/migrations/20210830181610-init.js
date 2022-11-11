@@ -159,6 +159,17 @@ module.exports = {
         unique: false,
         allowNull: true,
       },
+      estado: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      fileID: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        field: 'file_id',
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,

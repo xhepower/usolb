@@ -4,6 +4,9 @@ const { checkRoles } = require('./../middlewares/auth.handler');
 const PdfService = require('./../services/pdf.service');
 const validatorHandler = require('./../middlewares/validator.handler');
 const multer = require('multer');
+const EasyFtp = require('easy-ftp');
+//const fetch = require('node-fetch');
+const ftp = new EasyFtp();
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'pdfs/');
@@ -37,7 +40,19 @@ router.get(
     }
   }
 );
+router.get(
+  '/servepdf',
 
+  async (req, res, next) => {
+    try {
+      res.download(
+        'https://drive.google.com/uc?id=1j4iyu1RKhC5hhPrTeWSHpBS-IqP9nypj&export=download'
+      );
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 router.get(
   '/:id',
   passport.authenticate('jwt', { session: false }),
@@ -84,6 +99,24 @@ router.post(
       console.log(file);
 
       res.sendStatus(200);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+router.post(
+  '/obtenerpdf',
+
+  async (req, res, next) => {
+    try {
+      const config = {
+        host: process.env.FTP_IP,
+        port: 21,
+        username: process.env.FTP_USERNAME,
+        password: process.env.FTP_PASSWORD,
+        type: 'ftp',
+      };
+      ftp.connect(config);
     } catch (error) {
       next(error);
     }
