@@ -4,19 +4,24 @@ const { checkRoles } = require('./../middlewares/auth.handler');
 const PdfService = require('./../services/pdf.service');
 const validatorHandler = require('./../middlewares/validator.handler');
 const multer = require('multer');
+const fs = require('fs');
 const EasyFtp = require('easy-ftp');
 //const fetch = require('node-fetch');
 const ftp = new EasyFtp();
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'pdfs/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
+  destination: 'pdfs',
+  filename: function (req, file, cb) {
+    cb(null, req.body.filename);
   },
 });
 
-const uploadStorage = multer({ storage: storage });
+const upload = multer({ storage: storage });
+/*const upload = multer({
+  dest: 'pdfs',
+  filename: function (req, file, cb) {
+    cb(null, req.body.filename);
+  },
+});*/
 
 const {
   createPdfSchema,
@@ -40,19 +45,15 @@ router.get(
     }
   }
 );
-router.get(
-  '/servepdf',
-
-  async (req, res, next) => {
-    try {
-      res.download(
-        'https://drive.google.com/uc?id=1j4iyu1RKhC5hhPrTeWSHpBS-IqP9nypj&export=download'
-      );
-    } catch (error) {
-      next(error);
-    }
+router.get('/archivos', async (req, res, next) => {
+  try {
+    const pdfs = fs.readdirSync('pdfs');
+    res.json(pdfs);
+  } catch (error) {
+    next(error);
   }
-);
+});
+
 router.get(
   '/:id',
   passport.authenticate('jwt', { session: false }),
@@ -85,25 +86,13 @@ router.post(
     }
   }
 );
-router.post(
-  '/subir',
-  passport.authenticate('jwt', { session: false }),
-  checkRoles('editor'),
-  uploadStorage.single('file'),
-  async (req, res, next) => {
-    try {
-      const title = req.body.title;
-      const file = req.file;
-
-      console.log(title);
-      console.log(file);
-
-      res.sendStatus(200);
-    } catch (error) {
-      next(error);
-    }
+router.post('/upload', upload.single('file'), async (req, res) => {
+  try {
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
   }
-);
+});
 router.post(
   '/obtenerpdf',
 
