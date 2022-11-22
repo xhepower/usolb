@@ -30,7 +30,7 @@ const options = {
     }
   },
 };
-app.use(cors(options));
+app.use(cors());
 require('./utils/auth');
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
