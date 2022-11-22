@@ -53,6 +53,16 @@ router.get('/archivos', async (req, res, next) => {
     next(error);
   }
 });
+router.get('/archivos/:file', async (req, res, next) => {
+  try {
+    const { file } = req.params;
+    res.setHeader('Content-type', 'application/pdf');
+    res.setHeader('Content-disposition', 'inline; filename="' + file + '"');
+    res.download(`${__dirname}/../pdfs/archivos/${file}`);
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.get(
   '/:id',

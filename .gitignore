@@ -191,7 +191,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
+pdfs/*
 postgres_data
 mysql_data
 

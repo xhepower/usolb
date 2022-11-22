@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 app.get('/nueva-ruta', (req, res) => {
   res.send('Hola, soy una nueva ruta');
 });
-app.use(express.static('pdfs'));
+app.use(express.static('./pdfs'));
 routerApi(app);
 
 app.use(logErrors);
