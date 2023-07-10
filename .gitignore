@@ -194,5 +194,7 @@ $RECYCLE.BIN/
 pdfs/*
 postgres_data
 mysql_data
-
+routes/pdfs/*
+routes/photos/*
+routes/barcodes/*
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,linux,macos

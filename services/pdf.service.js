@@ -3,12 +3,22 @@ const boom = require('@hapi/boom');
 
 const { models } = require('../libs/sequelize');
 
-class PdfsService {
+class PdfService {
   constructor() {}
 
   async create(data) {
-    const newPdf = await models.Pdf.create(data);
-    return newPdf;
+    const guardado = await this.encontrarPDF(data.pdf);
+    if (guardado == false) {
+      try {
+        //console.log(data);
+        const newPdf = await models.Pdf.create(data);
+        return newPdf;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    // console.log(data);
   }
 
   async find(query) {
@@ -20,6 +30,7 @@ class PdfsService {
       options.where.file = file;
     }
     const pdfs = await models.Pdf.findAll(options);
+    //console.log(pdfs.length);
     return pdfs;
   }
 
@@ -36,7 +47,7 @@ class PdfsService {
     return pdf;
   }
   async findByFileName(filename) {
-    const pdf = await models.Pdf.findAll({ where: { file: filename } });
+    const pdf = await models.Pdf.findAll({ where: { pdf: filename } });
     if (!pdf) {
       throw boom.notFound('pdf not found');
     }
@@ -45,7 +56,17 @@ class PdfsService {
     }
     return pdf;
   }
-
+  async encontrarPDF(filename) {
+    const pdf = await models.Pdf.findAll({ where: { pdf: filename } });
+    //console.log(pdf);
+    if (!pdf) {
+      return false;
+    }
+    if (pdf.isBlock) {
+      throw boom.conflict('pdf is block');
+    }
+    return true;
+  }
   async update(id, changes) {
     const model = await this.findOne(id);
     const rta = await model.update(changes);
@@ -58,5 +79,8 @@ class PdfsService {
     return { rta: true };
   }
 }
-
-module.exports = PdfsService;
+// (async () => {
+//   const clase = new PdfService();
+//   console.log(await clase.encontrarPDF('1059067594-AT990531-29-6.pdf'));
+// })();
+module.exports = PdfService;

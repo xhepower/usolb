@@ -27,6 +27,7 @@
   "dependencies": {
     "@hapi/boom": "^9.1.4",
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "easy-ftp": "^0.4.2",

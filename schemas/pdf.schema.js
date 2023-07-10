@@ -10,25 +10,10 @@ const email = Joi.string();
 const passport = Joi.string();
 const purpose = Joi.string();
 const issued = Joi.string();
-const refused = Joi.string();
-const file = Joi.string();
-const photo = Joi.binary();
-const barcode = Joi.binary();
-const date = Joi.date();
-const estado = Joi.string();
-/*
- idNumber: ,
-      name: ,
-      city: ,
-      address: ,
-      phone: ,
-      email: ,
-      passport: ,
-      purpose: ,
-      issued: ,
-      refused: ,
-      file: ,
-*/
+const archivo = Joi.string();
+const pdf = Joi.string();
+const computadora = Joi.string();
+const oficina = Joi.string();
 
 const createPdfSchema = Joi.object({
   name: name,
@@ -39,13 +24,11 @@ const createPdfSchema = Joi.object({
   email: email,
   passport: passport,
   purpose: purpose,
+  archivo: archivo,
+  pdf: pdf,
   issued: issued,
-  refused: refused,
-  file: file,
-  date: date,
-  photo: photo,
-  barcode: barcode,
-  estado: estado,
+  computadora: computadora,
+  oficina: oficina,
 });
 
 const updatePdfSchema = Joi.object({

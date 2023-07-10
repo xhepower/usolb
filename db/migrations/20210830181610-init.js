@@ -1,10 +1,6 @@
 'use strict';
 
 const { USER_TABLE } = require('./../models/user.model');
-const { INGRESO_TABLE } = require('./../models/ingreso.model');
-const { EGRESO_TABLE } = require('./../models/egreso.model');
-const { CUENTA_TABLE } = require('./../models/cuenta.model');
-const { CONCEPTO_TABLE } = require('./../models/concepto.model');
 const { PDF_TABLE } = require('./../models/pdf.model');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -41,47 +37,19 @@ module.exports = {
         defaultValue: Sequelize.NOW,
       },
     });
-    //# de aqui////////////////
-
-    await queryInterface.createTable(CONCEPTO_TABLE, {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.DataTypes.INTEGER,
-      },
-      name: {
-        type: Sequelize.DataTypes.STRING,
-        unique: true,
-        allowNull: false,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DataTypes.DATE,
-        field: 'created_at',
-        defaultValue: Sequelize.NOW,
-      },
-    });
-    await queryInterface.createTable(CUENTA_TABLE, {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.DataTypes.INTEGER,
-      },
-      name: {
-        type: Sequelize.DataTypes.STRING,
-        unique: true,
-        allowNull: false,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DataTypes.DATE,
-        field: 'created_at',
-        defaultValue: Sequelize.NOW,
-      },
-    });
     await queryInterface.createTable(PDF_TABLE, {
+      //   "date": "2022-08-09T06:00:00.000Z",
+      // "name": "YOSELYN LIZETH PINEDA AYALA",
+      // "idNumber": "1601199400025",
+      // "city": "MACHOLOA",
+      // "address": "CALLE PRINCIPAL SALIDA HACIA SAN NICOLAS",
+      // "phone": "+50496070778",
+      // "email": "lizethpineda93@icloud.com",
+      // "passport": "G174603",
+      // "purpose": "TEMP. BUSINESS PLEASURE VISITOR (B)",
+      // "issued": "NO",
+      // "archivo": "yoselyn lizeth.pdf",
+      // "pdf": "1601199400025-G174603-9-7.pdf"
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -134,40 +102,29 @@ module.exports = {
         unique: false,
         allowNull: true,
       },
-      refused: {
-        type: Sequelize.DataTypes.STRING,
-        unique: false,
-        allowNull: true,
-      },
-      file: {
-        type: Sequelize.DataTypes.STRING,
-        unique: true,
-        allowNull: true,
-      },
       date: {
         type: Sequelize.DataTypes.DATE,
         unique: false,
         allowNull: true,
       },
-      photo: {
-        type: Sequelize.DataTypes.STRING.BINARY,
-        unique: false,
-        allowNull: true,
-      },
-      barcode: {
-        type: Sequelize.DataTypes.STRING.BINARY,
-        unique: false,
-        allowNull: true,
-      },
-      estado: {
+      pdf: {
         type: Sequelize.DataTypes.STRING,
         unique: false,
         allowNull: true,
       },
-      fileID: {
+      computadora: {
         type: Sequelize.DataTypes.STRING,
         unique: false,
-        field: 'file_id',
+        allowNull: true,
+      },
+      oficina: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
+        allowNull: true,
+      },
+      archivo: {
+        type: Sequelize.DataTypes.STRING,
+        unique: false,
         allowNull: true,
       },
       createdAt: {
@@ -177,112 +134,11 @@ module.exports = {
         defaultValue: Sequelize.NOW,
       },
     });
-
-    await queryInterface.createTable(INGRESO_TABLE, {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.DataTypes.INTEGER,
-      },
-      descripcion: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: true,
-      },
-      monto: {
-        type: Sequelize.DataTypes.INTEGER,
-        allowNull: false,
-      },
-      tipo: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: false,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DataTypes.DATE,
-        field: 'created_at',
-        defaultValue: Sequelize.NOW,
-      },
-      cuentaId: {
-        field: 'cuenta_id',
-        allowNull: true,
-        type: Sequelize.DataTypes.INTEGER,
-        references: {
-          model: CUENTA_TABLE,
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-      },
-      conceptoId: {
-        field: 'concepto_id',
-        allowNull: true,
-        type: Sequelize.DataTypes.INTEGER,
-        references: {
-          model: CONCEPTO_TABLE,
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-      },
-    });
-    await queryInterface.createTable(EGRESO_TABLE, {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.DataTypes.INTEGER,
-      },
-      descripcion: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: true,
-      },
-      monto: {
-        type: Sequelize.DataTypes.INTEGER,
-        allowNull: false,
-      },
-      tipo: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: false,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DataTypes.DATE,
-        field: 'created_at',
-        defaultValue: Sequelize.NOW,
-      },
-      cuentaId: {
-        field: 'cuenta_id',
-        allowNull: true,
-        type: Sequelize.DataTypes.INTEGER,
-        references: {
-          model: CUENTA_TABLE,
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-      },
-      conceptoId: {
-        field: 'concepto_id',
-        allowNull: true,
-        type: Sequelize.DataTypes.INTEGER,
-        references: {
-          model: CONCEPTO_TABLE,
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-      },
-    });
-    //hasta aqui
   },
 
   down: async (queryInterface) => {
     await queryInterface.dropTable(USER_TABLE);
-    await queryInterface.dropTable(INGRESO_TABLE);
-    await queryInterface.dropTable(EGRESO_TABLE);
-    await queryInterface.dropTable(CUENTA_TABLE);
-    await queryInterface.dropTable(CONCEPTO_TABLE);
+
     await queryInterface.dropTable(PDF_TABLE);
   },
 };
