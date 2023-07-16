@@ -193,6 +193,7 @@ $RECYCLE.BIN/
 *.lnk
 pdfs/*
 photos/*
+barcodes/*
 postgres_data
 mysql_data
 routes/pdfs/*
