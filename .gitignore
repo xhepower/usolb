@@ -191,9 +191,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-pdfs/*
-photos/*
-barcodes/*
+pdfs/*.pdf
+photos/*.pdf
+barcodes/*.pdf
 postgres_data
 mysql_data
 routes/pdfs/*
