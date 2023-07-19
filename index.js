@@ -12,7 +12,7 @@ const {
 const app = express();
 const port = process.env.PORT || 3000;
 const passport = require('passport');
-
+app.set('server.timeout', 300000);
 app.use(passport.initialize({ session: false }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
