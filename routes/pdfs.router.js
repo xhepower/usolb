@@ -13,7 +13,6 @@ const service = new PdfService();
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
-  checkRoles('user', 'editor'),
   async (req, res, next) => {
     try {
       const pdfs = await service.find(req.query);

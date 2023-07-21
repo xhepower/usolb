@@ -8,17 +8,15 @@ class PdfService {
 
   async create(data) {
     const guardado = await this.encontrarPDF(data.pdf);
+
     if (guardado == false) {
       try {
-        //console.log(data);
         const newPdf = await models.Pdf.create(data);
         return newPdf;
       } catch (error) {
         console.error(error);
       }
     }
-
-    // console.log(data);
   }
 
   async find(query) {
@@ -30,7 +28,7 @@ class PdfService {
       options.where.file = file;
     }
     const pdfs = await models.Pdf.findAll(options);
-    //console.log(pdfs.length);
+
     return pdfs;
   }
 
@@ -59,13 +57,16 @@ class PdfService {
   async encontrarPDF(filename) {
     const pdf = await models.Pdf.findAll({ where: { pdf: filename } });
     //console.log(pdf);
-    if (!pdf) {
-      return false;
+    let rta;
+    if (pdf.length === 0) {
+      rta = false;
+    } else {
+      rta = true;
     }
     if (pdf.isBlock) {
       throw boom.conflict('pdf is block');
     }
-    return true;
+    return rta;
   }
   async update(id, changes) {
     const model = await this.findOne(id);
@@ -79,8 +80,5 @@ class PdfService {
     return { rta: true };
   }
 }
-// (async () => {
-//   const clase = new PdfService();
-//   console.log(await clase.encontrarPDF('1059067594-AT990531-29-6.pdf'));
-// })();
+
 module.exports = PdfService;
